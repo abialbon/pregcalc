@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-_launchURL() async {
-  const url = 'https://www.buymeacoffee.com/abialbon';
-  if (await canLaunch(url)) {
-    await launch(url);
-  }
-}
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AboutPage extends StatelessWidget {
+
+  _launchURL() async {
+  const url = 'https://github.com/abialbon/pregcalc';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } 
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +25,17 @@ class AboutPage extends StatelessWidget {
             Navigator.pushNamed(context, '/faq');
           },
         ),
-        Card(
+        Divider(),
+        ListTile(
+          leading: Icon(MdiIcons.github),
+          title: Text('It\'s open source'),
+          subtitle: Text('Read the source code'),
+          onTap: () {
+            _launchURL();
+          },
+        ),
+        Divider(),
+        Container(
             child: Padding(
               padding: const EdgeInsets.all(32.0),
               child: Column(
@@ -35,11 +48,12 @@ class AboutPage extends StatelessWidget {
                     Text('PregCalc', style: TextStyle(fontSize: 20.0, fontFamily: 'Inter'),),
                     SizedBox(height: 10.0,),
                     Text('by Abialbon Paul'),
-                    Text('version 1.0.0')
+                    Text('version 1.1.2')
                   ]
               ),
             )
         ),
+        Divider()
       ],
     );
   }

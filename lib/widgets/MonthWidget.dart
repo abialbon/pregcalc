@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preg_calc/models/EDD.dart';
 import 'package:preg_calc/models/USG.dart';
 import 'package:provider/provider.dart';
 import 'package:preg_calc/models/LMP.dart';
@@ -77,8 +78,11 @@ class _MonthWidgetState extends State<MonthWidget> {
                           if (widget.type == 'lmp') {
                             Provider.of<LMP>(context, listen: false).month =
                                 selectedMonth;
-                          } else {
+                          } else if (widget.type == 'usg') {
                             Provider.of<USG>(context, listen: false).month =
+                                selectedMonth;
+                          } else {
+                            Provider.of<EDD>(context, listen: false).month =
                                 selectedMonth;
                           }
                         });

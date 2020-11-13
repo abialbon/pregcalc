@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:preg_calc/models/EDD.dart';
 import 'package:preg_calc/models/USG.dart';
 import 'package:provider/provider.dart';
 import 'package:preg_calc/models/LMP.dart';
@@ -61,8 +62,10 @@ class _DateWidgetState extends State<DateWidget> {
                         selectedDay = selected ? index + 1 : null;
                         if (widget.type == 'lmp') {
                           Provider.of<LMP>(context, listen: false).day = selectedDay;
-                        } else {
+                        } else if (widget.type == 'usg') {
                           Provider.of<USG>(context, listen: false).day = selectedDay;
+                        } else {
+                          Provider.of<EDD>(context, listen: false).day = selectedDay;
                         }
                       });
                     },

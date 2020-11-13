@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preg_calc/pages/EDDCalculation.dart';
 import 'package:preg_calc/pages/LMPCalculation.dart';
 import 'package:preg_calc/pages/USGCalculation.dart';
 import 'package:preg_calc/pages/BSCalculation.dart';
@@ -19,7 +20,8 @@ class _HomeState extends State<Home> {
   List<String> titles = [
     'Last Menstural Period',
     'Ultrasonography Date',
-    'Bishop score',
+    'Expected Due Date',
+    'Bishop Score',
     'About'
   ];
 
@@ -36,7 +38,9 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.pushNamed(context, '/faq');
               },
-              child: Text('FAQ'),
+              child: Text('FAQ', style: TextStyle(
+                color: Colors.white
+              )),
           )
         ],
       ),
@@ -48,6 +52,7 @@ class _HomeState extends State<Home> {
             children: [
               LMPCalculation(),
               USGCalculation(),
+              EDDCalculation(),
               ChangeNotifierProvider(
                   create: (context) => Bishop(),
                   child: BSCalculation()
@@ -62,8 +67,9 @@ class _HomeState extends State<Home> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(MdiIcons.water, color: Colors.red,), label: 'LMP'),
           BottomNavigationBarItem(icon: Icon(MdiIcons.carWindshield, color: Colors.purple), label: 'USG'),
-          BottomNavigationBarItem(icon: Icon(MdiIcons.calculator, color: Colors.teal), label: 'Bishop score'),
-          BottomNavigationBarItem(icon: Icon(Icons.info_rounded, color: Colors.amber), label: 'About')
+          BottomNavigationBarItem(icon: Icon(MdiIcons.calendar, color: Colors.orange), label: 'EDD'),
+          BottomNavigationBarItem(icon: Icon(MdiIcons.calculator, color: Colors.teal), label: 'BISHOP'),
+          BottomNavigationBarItem(icon: Icon(Icons.info_rounded, color: Colors.amber), label: 'ABOUT')
         ],
         currentIndex: _selectedIndex,
         onTap: (int index) {

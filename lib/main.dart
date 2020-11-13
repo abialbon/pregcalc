@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primarySwatch: Colors.teal,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.teal,
         primaryColor: Colors.teal[700],
         primaryColorDark: Colors.teal[700]
       ),

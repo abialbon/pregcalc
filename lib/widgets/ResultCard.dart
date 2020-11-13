@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:preg_calc/models/EDD.dart';
 import 'package:provider/provider.dart';
 import 'package:preg_calc/models/LMP.dart';
 import 'package:preg_calc/models/USG.dart';
@@ -10,17 +11,23 @@ Configs config = Configs();
 class ResultCard extends StatelessWidget {
   final String type;
   ResultCard({this.type});
+
+  List<Widget> getPog(var query) {
+    return [
+      Text('PERIOD OF GESTATION',
+          style: config.hintStyle,),
+      SizedBox(height: 4.0),
+      Text(
+        '${query.pogWeeks} weeks ${query.pogDays} days',
+        style: config.resultStyle,
+      ),
+    ];
+  }
   
   Column getColumn(var query) {
     return Column(
       children: [
-        Text('PERIOD OF GESTATION',
-          style: config.hintStyle,),
-        SizedBox(height: 4.0),
-        Text(
-          '${query.pogWeeks} weeks ${query.pogDays} days',
-          style: config.resultStyle,
-        ),
+        ...getPog(query),
         SizedBox(height: 16.0),
         Text('EXPECTED DATE OF DELIVERY',
           style: config.hintStyle,),
@@ -48,7 +55,7 @@ class ResultCard extends StatelessWidget {
           }),
         ),
       );
-    } else {
+    } else if (type == 'usg') {
       return Card(
         elevation: 3,
         child: Container(
@@ -58,6 +65,23 @@ class ResultCard extends StatelessWidget {
               return Text('${query.message}');
             }
             return getColumn(query);
+          }),
+        ),
+      );
+    } else {
+      return Card(
+        elevation: 3,
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Consumer<EDD>(builder: (context, query, _) {
+            if (!query.success) {
+              return Text('${query.message}');
+            }
+            return Column(
+              children: [
+                ...getPog(query)
+              ],
+            );
           }),
         ),
       );
